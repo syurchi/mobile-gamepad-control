@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+	<head>
+		<title>Mobile Gamepad 0.0.1</title>
+		<style rel='stylesheet' type='text/css'>
+			.arrow {
+				width: 0;
+				height: 0;
+				margin-right: auto;
+				margin-left: auto;
+			}
+
+			.rect {
+				background-color: #fc1640;
+				margin-right: auto;
+				margin-left: auto;
+			}
+
+			#up {
+				border-left: 150px solid transparent;
+				border-right: 150px solid transparent;
+				border-bottom: 150px solid #fc1640;
+			}
+
+			#down {
+				border-left: 150px solid transparent;
+				border-right: 150px solid transparent;
+				border-top: 150px solid #fc1640;
+			}
+
+			#left {
+				border-top: 150px solid transparent;
+				border-bottom: 150px solid transparent;
+				border-right: 150px solid #fc1640;
+			}
+
+			#right {
+				border-top: 150px solid transparent;
+				border-bottom: 150px solid transparent;
+				border-left: 150px solid #fc1640;
+			}
+
+			#land {
+				width: 300px;
+				height: 150px;
+			}
+
+			#port {
+				width: 150px;
+				height: 300px;
+			}
+
+			.controls {
+				vertical-align: middle;
+				margin-left: auto;
+				margin-right: auto;
+				width: 70%;
+			}
+
+			#middle-ctrl {
+				height: 350px;
+				vertical-align: middle;
+			}
+
+			#left-ctrl {
+				float: left;
+				height: 350px;
+				width: 300px;
+			}
+
+			#right-ctrl {
+				float: right;
+				height: 350px;
+				width: 300px;
+			}
+		</style>
+		<script type='text/javascript' src='../gamepad.js'></script>
+	</head>	
+	<body>
+		<header>
+			<h1>Gamepad</h1>
+		</header>
+		<div class='controls'>
+			<div class='arrow' id='up'></div>
+			<div class='rect' id='land'></div>
+			<div id='middle-ctrl'>
+				<div id='left-ctrl'>
+					<div class='arrow' id='left'></div>
+					<div class='rect' id='port'></div>
+				</div>
+				<div id='right-ctrl'>
+					<div class='rect' id='port'></div>
+					<div class='arrow' id='right'></div>
+				</div>
+			</div>
+			<div class='rect' id='land'></div>
+			<div class='arrow' id='down'></div>
+		</div>
+	</body>

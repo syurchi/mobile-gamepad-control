@@ -10,9 +10,9 @@ class httpHandler(BaseHTTPRequestHandler):
 		h = self.__parse()
 
 		if self.__isMobile(h['User-Agent']):
-			self.__open_file('../client/views/gamepad.html')
+			self.__open_file('../client/gamepad.html')
 		elif self.__isDesktop(h['User-Agent']):
-			self.__open_file('../client/views/game.html')
+			self.__open_file('../client/gamepad.html')
 		else:
 			self.send_error(404, 'Device not supported')
 		return
