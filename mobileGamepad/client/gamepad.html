@@ -1,98 +1,48 @@
 <!DOCTYPE html>
+<html>
 	<head>
-		<title>Mobile Gamepad 0.0.1</title>
-		<style rel='stylesheet' type='text/css'>
-			.arrow {
-				width: 0;
-				height: 0;
-				margin-right: auto;
-				margin-left: auto;
-			}
-
-			.rect {
-				background-color: #fc1640;
-				margin-right: auto;
-				margin-left: auto;
-			}
-
-			#up {
-				border-left: 150px solid transparent;
-				border-right: 150px solid transparent;
-				border-bottom: 150px solid #fc1640;
-			}
-
-			#down {
-				border-left: 150px solid transparent;
-				border-right: 150px solid transparent;
-				border-top: 150px solid #fc1640;
-			}
-
-			#left {
-				border-top: 150px solid transparent;
-				border-bottom: 150px solid transparent;
-				border-right: 150px solid #fc1640;
-			}
-
-			#right {
-				border-top: 150px solid transparent;
-				border-bottom: 150px solid transparent;
-				border-left: 150px solid #fc1640;
-			}
-
-			#land {
-				width: 300px;
-				height: 150px;
-			}
-
-			#port {
-				width: 150px;
-				height: 300px;
-			}
-
-			.controls {
-				vertical-align: middle;
-				margin-left: auto;
-				margin-right: auto;
-				width: 70%;
-			}
-
-			#middle-ctrl {
-				height: 350px;
-				vertical-align: middle;
-			}
-
-			#left-ctrl {
-				float: left;
-				height: 350px;
-				width: 300px;
-			}
-
-			#right-ctrl {
-				float: right;
-				height: 350px;
-				width: 300px;
-			}
-		</style>
-		<script type='text/javascript' src='../gamepad.js'></script>
+		<title>Striped Socks 0.0.1</title>
+		<link rel='stylesheet' type='text/css' href='styles/bootstrap/css/bootstrap.min.css'>
+		<link rel='stylesheet' type='text/css' href='styles/main.css'>
 	</head>	
 	<body>
-		<header>
-			<h1>Gamepad</h1>
-		</header>
-		<div class='controls'>
-			<div class='arrow' id='up'></div>
-			<div class='rect' id='land'></div>
-			<div id='middle-ctrl'>
-				<div id='left-ctrl'>
-					<div class='arrow' id='left'></div>
-					<div class='rect' id='port'></div>
-				</div>
-				<div id='right-ctrl'>
-					<div class='rect' id='port'></div>
-					<div class='arrow' id='right'></div>
+		<nav class='navbar navbar-default'>
+			<div class="container-fluid">
+				<div class='navbar-header'>
+					<span class='navbar-brand'>Gamepad</span>
+				<div>
+			</div>
+		</nav>
+
+		<div class='container'>
+			<div class='row'>
+				<div class='col-xs-6 col-xs-offset-3'>
+					<button type='button' class='btn btn-default btn-lg btn-lg-cust'>
+						<span class='glyphicon glyphicon-chevron-up'/>
+					</button>
 				</div>
 			</div>
-			<div class='rect' id='land'></div>
-			<div class='arrow' id='down'></div>
+			<div class='row'>
+				<div class='col-xs-6'>
+					<button type='button' class='btn btn-default btn-lg btn-lg-cust'>
+						<span class='glyphicon glyphicon-chevron-left'/>
+					</button>
+				</div>
+				<div class='col-xs-6'>
+					<button type='button' class='btn btn-default btn-lg btn-lg-cust'>
+						<span class='glyphicon glyphicon-chevron-right'/>
+					</button>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-xs-6 col-xs-offset-3'>
+					<button type='button' class='btn btn-default btn-lg btn-lg-cust'>
+						<span class='glyphicon glyphicon-chevron-down'/>
+					</button>
+				<div>
+			</div>
 		</div>
 	</body>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type='text/javascript' src='gamepad.js'></script>
+</html>

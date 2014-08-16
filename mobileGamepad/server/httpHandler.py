@@ -3,18 +3,19 @@ import re
 
 class httpHandler(BaseHTTPRequestHandler):
 	def do_GET(self):
-		self.send_response(200)
-		self.send_header('Content-type', 'text/html')
-		self.end_headers()
-		
 		h = self.__parse()
 
-		if self.__isMobile(h['User-Agent']):
-			self.__open_file('../client/gamepad.html')
-		elif self.__isDesktop(h['User-Agent']):
-			self.__open_file('../client/gamepad.html')
+		if self.path == '/':
+			if self.__isMobile(h['User-Agent']):
+				self.__open_file('../client/gamepad.html')
+			elif self.__isDesktop(h['User-Agent']):
+				self.__open_file('../client/game.html')
+			else:
+				self.send_error(404, 'Device not supported')
 		else:
-			self.send_error(404, 'Device not supported')
+			#add appropriate path prefix
+			path = '../client/' + self.path
+			self.__open_file(path)
 		return
 
 	#parse http headers and put keys and values into a dictionary
@@ -25,7 +26,7 @@ class httpHandler(BaseHTTPRequestHandler):
 
 	#returns true if the device is mobile, false otherwise
 	def __isMobile(self, str):
-		return True if str.count('iPad') > 0 else False
+		return True if ((str.count('Android') > 0) | (str.count('iPad') > 0)) else False
 
 	#returns true if the debice is a desktop, false otherwise
 	def __isDesktop(self, str):

@@ -1,6 +1,5 @@
 from BaseHTTPServer import HTTPServer 
 import httpHandler
-import socketHandler
 
 def main():
 	try:
