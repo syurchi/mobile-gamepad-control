@@ -1,20 +1,24 @@
 from BaseHTTPServer import BaseHTTPRequestHandler
 import re
 
-class httpHandler(BaseHTTPRequestHandler):
+class HttpHandler(BaseHTTPRequestHandler):
 	def do_GET(self):
 		h = self.__parse()
 
+		#TODO: check only if mobile, otherwise assume desktop
+		#TODO: create dictionary, with key stating if client is desktop or not -> isMobile: true
 		if self.path == '/':
-			if self.__isMobile(h['User-Agent']):
-				self.__open_file('../client/gamepad.html')
-			elif self.__isDesktop(h['User-Agent']):
-				self.__open_file('../client/game.html')
+			if self.__is_mobile(h['User-Agent']):
+				self.__open_file('/home/syurchi/Documents/programming/projects/mobileGamepad/mobileGamepad/client/gamepad.html')
+			elif self.__is_desktop(h['User-Agent']):
+				self.__open_file('/home/syurchi/Documents/programming/projects/mobileGamepad/mobileGamepad/client/game.html')
 			else:
 				self.send_error(404, 'Device not supported')
+		elif self.path == '/home/syurchi/Documents/programming/projects/mobileGamepad/mobileGamepad/server/socketServer':
+			self.__open_file('/home/syurchi/ififDocuments/programming/projects/mobileGamepad/mobileGamepad/server/socketServer.py')
 		else:
 			#add appropriate path prefix
-			path = '../client/' + self.path
+			path = '/home/syurchi/Documents/programming/projects/mobileGamepad/mobileGamepad/client/' + self.path
 			self.__open_file(path)
 		return
 
@@ -25,11 +29,11 @@ class httpHandler(BaseHTTPRequestHandler):
 		return header_dict
 
 	#returns true if the device is mobile, false otherwise
-	def __isMobile(self, str):
+	def __is_mobile(self, str):
 		return True if ((str.count('Android') > 0) | (str.count('iPad') > 0)) else False
 
 	#returns true if the debice is a desktop, false otherwise
-	def __isDesktop(self, str):
+	def __is_desktop(self, str):
 		return True if str.count('Linux') > 0 else False
 
 	#open the html template file
@@ -40,5 +44,4 @@ class httpHandler(BaseHTTPRequestHandler):
 			file.close()
 		except IOError:
 			self.send_error(404, 'File not found')
-
 
