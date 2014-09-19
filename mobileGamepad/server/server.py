@@ -4,19 +4,19 @@ from multiprocessing import Process
 import asyncore
 import socketServer
 
-def create_http():
+def __create_http():
 	http = HTTPServer(('0.0.0.0', 9000), HttpHandler)
 	print 'HTTP server started...'
 	http.serve_forever()
 
-def create_sock():
+def __create_sock():
 	socketServer.SocketServer('0.0.0.0', 9001)
 	print 'Socket server started...'
 	asyncore.loop()
 
 def main():
-	hs = Process(target=create_http, args=[])
-	ss = Process(target=create_sock, args=[])
+	hs = Process(target=__create_http, args=[])
+	ss = Process(target=__create_sock, args=[])
 
 	try:
 		hs.start()

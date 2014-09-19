@@ -1,9 +1,10 @@
 from BaseHTTPServer import BaseHTTPRequestHandler
-import re
+# import re
+from parse import httpParse
 
 class HttpHandler(BaseHTTPRequestHandler):
 	def do_GET(self):
-		h = self.__parse()
+		h = httpParse(self.headers)
 
 		#TODO: check only if mobile, otherwise assume desktop
 		#TODO: create dictionary, with key stating if client is desktop or not -> isMobile: true
@@ -23,10 +24,10 @@ class HttpHandler(BaseHTTPRequestHandler):
 		return
 
 	#parse http headers and put keys and values into a dictionary
-	def __parse(self):
-		headers = str(self.headers)
-		header_dict = dict(re.findall(r"(?P<name>.*?): (?P<value>.*?)\r\n", headers))
-		return header_dict
+	# def __parse(self):
+	# 	headers = str(self.headers)
+	# 	header_dict = dict(re.findall(r"(?P<name>.*?): (?P<value>.*?)\r\n", headers))
+	# 	return header_dict
 
 	#returns true if the device is mobile, false otherwise
 	def __is_mobile(self, str):

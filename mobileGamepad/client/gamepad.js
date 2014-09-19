@@ -15,7 +15,7 @@ $(document).ready(function () {
 			socket.onopen = function () {
 				$('.button').bind('click', function (event) {
 					console.log('EVENT DATA: ' + event);
-					send('down');
+					socket.send('down');
 				});
 			};
 
@@ -40,8 +40,8 @@ $(document).ready(function () {
 		}
 
 		// $('.button').click(function (event) {
-		// 	console.log('EVENT DATA: ' + event);
-		// 	send('down');
+		// console.log('EVENT DATA: ' + event);
+		// send('down');
 		// });
 	}
 });
