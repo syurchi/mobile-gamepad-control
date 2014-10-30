@@ -25,6 +25,7 @@ class SocketHandler(asyncore.dispatcher_with_send):
 
 	def __create_handshake(self, headers):
 		print 'Beginning handshake...'
+		print headers
 		
 		h = httpParse(headers)
 
@@ -41,22 +42,33 @@ class SocketHandler(asyncore.dispatcher_with_send):
 		}
 		return handshake
 
+	#TODO: encode message frame to send message to desktop client
+	def __create_frame(self, data):
+		pass
+
+	#TODO: decode message from mobile client
+	def __decode_message(self, data):
+		pass
+
 	#send data to desktop client
 	def __send_to_desktop(self, data):
 		clientList = self.clients.get()
+		print clientList
 		
 		#for our purpose there should only be two clients, one desktop, one mobile (for now)
 		for c in clientList:
+			print c
 			if c is not self:
-				c.send(data)				
+				newData = self.__create_frame(data)
+				c.send(newData)				
 				print 'Sending data to desktop client'
 
 	#handle a read() call
 	def handle_read(self):
 		data = self.recv(8192)
-		print 'reading...'
+		print 'reading...\n'
 		if data:
-			if self.handshaken is False:
+			if self.handshaken is False:ya 
 				handshake = self.__create_handshake(data)
 				self.handshaken = True
 				self.send(handshake)

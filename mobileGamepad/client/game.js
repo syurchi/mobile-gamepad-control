@@ -3,19 +3,16 @@ $(document).ready(function () {
 	var host,
 		socket;
 
-	if("WebSocket" in window) {
-		connect();
-	}
+	connect();
 
 	function connect() {
 		try {
 			host = 'ws://0.0.0.0:9001';
 			socket = new WebSocket(host);
-			console.log(socket.readyState);
 
 			socket.onopen = function () {
-				console.log(socket.readyState);
 				console.log('CONNECTED');
+				// move('down');
 			};
 
 			socket.onmessage = function (direction) {
@@ -39,6 +36,8 @@ $(document).ready(function () {
 		else if(d == 'right')
 			$('.square').animate({ 'right': '-=100px' }, 'fast' );
 		else
-			$('.square').animate({ 'down': '-=100px' }, 'fast' );
+			console.log('moving down');
+			$('.square').animate({height:300},"slow");
+			// $('.square').animate({ 'down': '-=100px' }, 'fast' );
 	}
 });

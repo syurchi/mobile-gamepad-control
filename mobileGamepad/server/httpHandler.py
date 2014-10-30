@@ -23,12 +23,6 @@ class HttpHandler(BaseHTTPRequestHandler):
 			self.__open_file(path)
 		return
 
-	#parse http headers and put keys and values into a dictionary
-	# def __parse(self):
-	# 	headers = str(self.headers)
-	# 	header_dict = dict(re.findall(r"(?P<name>.*?): (?P<value>.*?)\r\n", headers))
-	# 	return header_dict
-
 	#returns true if the device is mobile, false otherwise
 	def __is_mobile(self, str):
 		return True if ((str.count('Android') > 0) | (str.count('iPad') > 0)) else False

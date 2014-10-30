@@ -9,14 +9,18 @@ $(document).ready(function () {
 
 	function connect() {
 		try {
-			host = 'ws://0.0.0.0:9001';
+			// NOTE: ensure this is write localhost address on connect
+			host = 'ws://192.168.0.101:9001';
 			socket = new WebSocket(host);
+			console.log(socket.readyState);
 
 			socket.onopen = function () {
-				$('.button').bind('click', function (event) {
-					console.log('EVENT DATA: ' + event);
-					socket.send('down');
-				});
+				console.log('CONNECTED');
+				// $('.button').bind('click', function (event) {
+				// 	console.log('EVENT DATA: ' + event);
+				console.log('sending down direction');
+				socket.send('down');
+				// });
 			};
 
 			socket.onmessage = function (msg) {
@@ -38,10 +42,5 @@ $(document).ready(function () {
 				console.log('ERROR: direction data not able to send \n' + e);
 			}
 		}
-
-		// $('.button').click(function (event) {
-		// console.log('EVENT DATA: ' + event);
-		// send('down');
-		// });
 	}
 });

@@ -1,14 +1,18 @@
 #create a clients list to keep track of the mobile and desktop clients
+clients = []
+
 class Clients():
 	def __init__(self):
-		self.clients = []
+		self.clients = clients
 
 	#check to see if client exists or not
 	def __isNewClient(self, client):
 		return client in self.clients
 
 	def append(self, client):
-		if self.__isNewClient(client) == False:
+		if self.clients == None:
+			self.clients = [client]
+		elif self.__isNewClient(client) == False:
 			print 'Adding client'
 			self.clients.append(client)
 		else:

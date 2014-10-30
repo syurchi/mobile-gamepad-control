@@ -15,20 +15,21 @@ class SocketServer(asyncore.dispatcher):
 		self.bind = host
 		self.listen(5)
 
-	def __sock_thread(self, socket):
+	def __sock_process(self, socket):
 		self.clients.append(socket)
 		print 'Stopped adding client'
 		self.socketHandler = SocketHandler(self, socket)
-		print 'Should have read and printed data'
 
 	#handle when a connection is established and a connect() has been issued, add client
 	def handle_accept(self):
 		pair = self.accept()
+		print 'Printing pair '
+		print pair
 		if pair != None:
-			print 'Printing pair '
-			print pair
+			# print 'Printing pair '
+			# print pair
 			socket, addr = pair
-			self.s = Process(target=self.__sock_thread(socket), args=[])
+			self.s = Process(target=self.__sock_process(socket), args=[])
 
 			try:
 				self.s.start()
