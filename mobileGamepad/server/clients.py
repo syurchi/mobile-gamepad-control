@@ -13,11 +13,11 @@ class Clients():
 		if self.clients == None:
 			self.clients = [client]
 		elif self.__isNewClient(client) == False:
-			print 'Adding client'
+			print 'Adding client\n'
 			self.clients.append(client)
 		else:
 			#TODO: add better error handling
-			print 'Client already exists'
+			print 'Client already exists\n'
 
 	def get(self):
 		return self.clients

@@ -43,12 +43,65 @@ class SocketHandler(asyncore.dispatcher_with_send):
 		return handshake
 
 	#TODO: encode message frame to send message to desktop client
-	def __create_frame(self, data):
-		pass
+	def __create_frame(self, string):
+		encoded = ""
+		b1 = 0x80
 
-	#TODO: decode message from mobile client
+		b1 |= 0x01
+		payload = string
+
+		#add FIN flag
+		encoded += chr(b1)
+
+		#second byte never masked
+		b2 = 0
+
+		length = payload.__len__()
+		if length < 126:
+			b2 |= length
+			encoded += chr(b2)
+		elif length < 65535: # 2^16 -1
+			b2 |= 126
+			encoded += chr(b2)
+			x = struct.pack(">H", length)
+			encoded += x
+		else:
+			x = struct.pack(">Q", length)
+			b2 = 126
+			encoded += chr(b2)
+			encoded += x
+
+		encoded += payload
+
+		return str(encoded)
+
+	#decode message from mobile client
 	def __decode_message(self, data):
-		pass
+		bytes = [ord(character) for character in data]
+		length = bytes[1] & 127 #following eight bytes used for length
+		firstMask = 2
+
+		#special cases
+		if length == 126:
+			firstMask = 4
+		elif length == 127:
+			firstMask = 10
+
+		#extract masks to find first data byte
+		masks = [m for m in bytes[firstMask : firstMask + 4]]
+		firstDataByte = firstMask + 4
+
+		decoded = []
+		i = firstDataByte
+		j = 0
+
+		while i < bytes.__len__():
+			#unmask current byte and add to decoded array
+			decoded.append(chr(bytes[i] ^ masks[j % 4]))
+			i += 1
+			j += 1
+
+		return str(decoded)
 
 	#send data to desktop client
 	def __send_to_desktop(self, data):
@@ -57,21 +110,21 @@ class SocketHandler(asyncore.dispatcher_with_send):
 		
 		#for our purpose there should only be two clients, one desktop, one mobile (for now)
 		for c in clientList:
-			print c
 			if c is not self:
-				newData = self.__create_frame(data)
-				c.send(newData)				
-				print 'Sending data to desktop client'
+				encodedData = self.__create_frame(data)
+				c.send(encodedData)
 
 	#handle a read() call
 	def handle_read(self):
 		data = self.recv(8192)
-		print 'reading...\n'
 		if data:
-			if self.handshaken is False:ya 
+			if self.handshaken is False:
 				handshake = self.__create_handshake(data)
 				self.handshaken = True
 				self.send(handshake)
 			else:
-				self.__send_to_desktop(data)
-				print data
+				decodedMessage = self.__decode_message(data)
+				print 'Decoded Message:'
+				print decodedMessage
+				print '\n\n'
+				self.__send_to_desktop(decodedMessage)

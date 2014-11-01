@@ -10,25 +10,27 @@ $(document).ready(function () {
 	function connect() {
 		try {
 			// NOTE: ensure this is write localhost address on connect
-			host = 'ws://192.168.0.101:9001';
+			host = 'ws://192.168.0.102:9001';
 			socket = new WebSocket(host);
 			console.log(socket.readyState);
 
-			socket.onopen = function () {
+			socket.onopen = function () {		
 				console.log('CONNECTED');
-				// $('.button').bind('click', function (event) {
-				// 	console.log('EVENT DATA: ' + event);
-				console.log('sending down direction');
-				socket.send('down');
-				// });
+
+				var d;
+				$('button').bind('click', function (event) {			
+					d = $(this).attr('id');
+					console.log(d);
+					send(d);
+				});
 			};
 
 			socket.onmessage = function (msg) {
-
+				//pass
 			};
 
 			socket.onclose = function () {
-
+				//pass
 			};
 		} catch (e) {
 			console.log('ERROR: ' + e);

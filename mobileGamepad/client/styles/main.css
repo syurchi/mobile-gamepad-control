@@ -2,6 +2,7 @@
 	width: 100px;
 	height: 100px;
 	background-color: #644A8C;
+	position: absolute;
 }
 
 .btn-lg-cust {

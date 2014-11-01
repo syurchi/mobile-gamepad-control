@@ -12,10 +12,11 @@ $(document).ready(function () {
 
 			socket.onopen = function () {
 				console.log('CONNECTED');
-				// move('down');
 			};
 
-			socket.onmessage = function (direction) {
+			socket.onmessage = function (data) {
+				var direction 
+				direction = parse(data.data);
 				console.log('MOVING: ' + direction);
 				move(direction);
 			};
@@ -30,14 +31,18 @@ $(document).ready(function () {
 
 	function move(d) {
 		if(d == 'up')
-			$('.square').animate({ 'up': '+=100px' }, 'fast' );
+			$('.square').animate({ height: '-=100px' }, 'fast' );
 		else if(d == 'left')
-			$('.square').animate({ 'left': '+=100px' }, 'fast' );
+			$('.square').animate({ width: '-=100px' }, 'fast' );
 		else if(d == 'right')
-			$('.square').animate({ 'right': '-=100px' }, 'fast' );
+			$('.square').animate({ width: '+=100px' }, 'fast' );
 		else
-			console.log('moving down');
-			$('.square').animate({height:300},"slow");
-			// $('.square').animate({ 'down': '-=100px' }, 'fast' );
+			$('.square').animate({ height: '+=100px' }, 'fast' );
+	}
+
+	function parse(d) {
+		str = d.split(/\W/).join();
+		str = str.replace(/\,/g, '');
+		return str;
 	}
 });
