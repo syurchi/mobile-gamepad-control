@@ -8,7 +8,7 @@ Connect a mobile device and desktop to localhost and control the movement of a s
 <br><br>
 
 
-**Note:** Only a Nexus 5 Android device and iPad Mini has been tested for mobile and Linux for desktop, others are currently not supported.
+**Note:** Only a Nexus 5 and iPad Mini were tested for mobile and Linux for desktop, others are currently not supported.
 
 Currently being developed and updated when I can find the time ;)
 
