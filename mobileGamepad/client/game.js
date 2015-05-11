@@ -31,13 +31,13 @@ $(document).ready(function () {
 
 	function move(d) {
 		if(d == 'up')
-			$('.square').animate({ height: '-=100px' }, 'fast' );
+			$('.square').animate({ 'marginTop': '-=100px' }, 'fast' );
 		else if(d == 'left')
-			$('.square').animate({ width: '-=100px' }, 'fast' );
+			$('.square').animate({ 'marginLeft': '-=100px' }, 'fast' );
 		else if(d == 'right')
-			$('.square').animate({ width: '+=100px' }, 'fast' );
+			$('.square').animate({ 'marginLeft': '+=100px' }, 'fast' );
 		else
-			$('.square').animate({ height: '+=100px' }, 'fast' );
+			$('.square').animate({ 'marginTop': '+=100px' }, 'fast' );
 	}
 
 	function parse(d) {

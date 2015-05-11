@@ -9,8 +9,8 @@ $(document).ready(function () {
 
 	function connect() {
 		try {
-			// NOTE: ensure this is write localhost address on connect
-			host = 'ws://192.168.0.102:9001';
+			// NOTE: ensure this is correct localhost address on connect
+			host = 'ws://192.168.2.16:9001';
 			socket = new WebSocket(host);
 			console.log(socket.readyState);
 
